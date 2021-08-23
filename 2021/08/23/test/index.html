@@ -1,165 +1,327 @@
-<html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<!DOCTYPE html>
+<html lang='zh-TW'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
   
-    <link rel="icon" href="/images/favicon.ico">
-  
-  <title>Snake&#39;s Blog</title>
-  
-<link rel="stylesheet" href="/snake/css/styles.css">
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>test - Snake's Blog</title>
 
   
-<script src="/snake/lib/jquery.js"></script>
+    <meta name="description" content="PWN_暫存器&amp;保護機制Register通用暫存器 參考  EAX : 累加器  EBX : 指向DS段的pointer  ECX : 字符、循環操作的計數器  EDX : I&#x2F;O pointer  ESI : pointer 指向DS暫存指的資料  EDI : pointer 指向ES暫存指的資料  ESP : pointer in stack (SS段)  EBP : pointer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="test">
+<meta property="og:url" content="https://yywc11.github.io/snake/2021/08/23/test/index.html">
+<meta property="og:site_name" content="Snake&#39;s Blog">
+<meta property="og:description" content="PWN_暫存器&amp;保護機制Register通用暫存器 參考  EAX : 累加器  EBX : 指向DS段的pointer  ECX : 字符、循環操作的計數器  EDX : I&#x2F;O pointer  ESI : pointer 指向DS暫存指的資料  EDI : pointer 指向ES暫存指的資料  ESP : pointer in stack (SS段)  EBP : pointer">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/c3XRC32.png">
+<meta property="og:image" content="https://i.imgur.com/6zH1EnB.png">
+<meta property="article:published_time" content="2021-08-23T13:18:40.000Z">
+<meta property="article:modified_time" content="2021-08-23T15:20:29.452Z">
+<meta property="article:author" content="Deng Yuan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/c3XRC32.png">
+  
+  
+
+  <!-- feed -->
+  
 
   
-<link rel="stylesheet" href="/snake/lib/bootstrap/css/bootstrap.min.css">
-
-  
-<script src="/snake/js/common.js"></script>
-
-  
-<script src="/snake/lib/bootstrap/js/bootstrap.js"></script>
-
-  
-<link rel="stylesheet" href="/snake/lib/font-awesome/css/font-awesome.min.css">
-
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-  <body>
-    <header class="header">
-  <div class="color-bar">
-    <ul>
-      <li class="bar1"></li>
-      <li class="bar2"></li>
-      <li class="bar3"></li>
-      <li class="bar4"></li>
-      <li class="bar5"></li>
-      <li class="bar6"></li>
-    </ul>
-  </div>
-  <div class="header-wrapper">
-    <div class="blog-title">
-      
-        <img class="logo" src="/snake/images/logo.png" alt="logo">
-      
-      <a href="/snake/" class="title">Snake&#39;s Blog</a>
-    </div>
-    <nav class="navbar navbar-menu">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" id="nav-btn" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-      </div>
-        <ul class="menu menu-pc">
-          
-            <li class="menu-item">
-              <a href="/" class="menu-item-link"><i class="fa fa-home"></i><span>首页</span></a>
-            </li>
-          
-            <li class="menu-item">
-              <a href="/tags/" class="menu-item-link"><i class="fa fa-tags"></i><span>Tags</span></a>
-            </li>
-          
-            <li class="menu-item">
-              <a href="/archives/" class="menu-item-link"><i class="fa fa-file"></i><span>归档</span></a>
-            </li>
-          
-            <li class="menu-item">
-              <a target="_blank" rel="noopener" href="https://github.com/littleee/" class="menu-item-link"><i class="fa fa-github"></i><span>github</span></a>
-            </li>
-          
-        </ul>
-    </nav>
-  </div>
-</header>
-<div class="collapse nav-collapse" style="position:fixed;top:59px;" id="bs-example-navbar-collapse-1">
-  <ul class="menu menu-mobile" style="list-style:none">
     
-      <li class="menu-item">
-        <a href="/" class="menu-item-link"><i class="fa fa-home"></i><span>首页</span></a>
-      </li>
+<link rel="stylesheet" href="/snake/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
     
-      <li class="menu-item">
-        <a href="/tags/" class="menu-item-link"><i class="fa fa-tags"></i><span>Tags</span></a>
-      </li>
-    
-      <li class="menu-item">
-        <a href="/archives/" class="menu-item-link"><i class="fa fa-file"></i><span>归档</span></a>
-      </li>
-    
-      <li class="menu-item">
-        <a target="_blank" rel="noopener" href="https://github.com/littleee/" class="menu-item-link"><i class="fa fa-github"></i><span>github</span></a>
-      </li>
-    
-  </ul>
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/snake/"><div class="main"><img no-lazy height="32px" src="https://i.imgur.com/arql0nV.png"/ onerror="javascript:this.classList.add('error');this.src='https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div></a></div>
+<nav class="menu dis-select"><a class="nav-item active" href="/snake/">網誌</a></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目錄</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Register"><span class="toc-text">Register</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%9A%AB%E5%AD%98%E5%99%A8"><span class="toc-text">通用暫存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%AE%B5%E6%9A%AB%E5%AD%98%E5%99%A8"><span class="toc-text">分段暫存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EFLAGS%E6%9A%AB%E5%AD%98%E5%99%A8"><span class="toc-text">EFLAGS暫存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EIP%E6%9A%AB%E5%AD%98%E5%99%A8"><span class="toc-text">EIP暫存器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#checksec"><span class="toc-text">checksec</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Arch"><span class="toc-text">Arch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RELRO"><span class="toc-text">RELRO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stack"><span class="toc-text">Stack</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NX-No-execute-windows-DEP"><span class="toc-text">NX (No-execute) windows(DEP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PIE-Postion-Indenpendent-executable-window-ASLR"><span class="toc-text">PIE(Postion-Indenpendent executable) window(ASLR)</span></a></li></ol></li></ol></li></ol></div></div></div>
+
+
 </div>
 
-    <main class="main">
-      <div class="content">
-        
-  <article class="post">
-    <div class="post-title">
-      <h2 class="title">test</h2>
-       
-    </div>
-     <div class="post-meta">
-      <span class="post-time">2021-08-23</span>
-    </div>
-    <div class="post-content">
-      
-    </div>
-  </article>
-  <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-      
-        <a href="/snake/2021/08/22/hello-world/" rel="next" title="Hello World">
-          <i class="fa fa-chevron-left"></i> Hello World
-        </a>
-      
-    </div>
 
-    <span class="post-nav-divider"></span>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="/snake/2021/08/23/python-translation/" rel="prev" title="品系介紹">
-          品系介紹 <i class="fa fa-chevron-right"></i>
-        </a>
+    </aside>
+    <div class='l_main'>
       
-    </div>
-  </div>
+
+      
 
 
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">首頁</a><span class="sep"></span><a class="cap breadcrumb" href="/">網誌</a></div><div id="post-meta">發布於&nbsp;<time datetime="2021-08-23T13:18:40.000Z">2021-08-23</time></div></div>
 
-      </div>
-        <div class="footer">
-  <div class="footer-wrapper">
-    <div class="copyright">
+<article class='content md post'>
+<h1 class="article-title"><span>test</span></h1>
+<h1 id="PWN-暫存器-amp-保護機制"><a href="#PWN-暫存器-amp-保護機制" class="headerlink" title="PWN_暫存器&amp;保護機制"></a>PWN_暫存器&amp;保護機制</h1><h2 id="Register"><a href="#Register" class="headerlink" title="Register"></a>Register</h2><h4 id="通用暫存器"><a href="#通用暫存器" class="headerlink" title="通用暫存器"></a>通用暫存器</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://zh.m.wikibooks.org/zh-tw/X86%E7%B5%84%E5%90%88%E8%AA%9E%E8%A8%80/X86%E6%9E%B6%E6%9E%84%E5%8F%8A%E5%AF%84%E5%AD%98%E5%99%A8%E8%A7%A3%E9%87%8A">參考</a><br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.imgur.com/c3XRC32.png"></p>
+</li>
+<li><p>EAX : 累加器</p>
+</li>
+<li><p>EBX : 指向DS段的pointer</p>
+</li>
+<li><p>ECX : 字符、循環操作的計數器</p>
+</li>
+<li><p>EDX : I/O pointer</p>
+</li>
+<li><p>ESI : pointer 指向DS暫存指的資料</p>
+</li>
+<li><p>EDI : pointer 指向ES暫存指的資料</p>
+</li>
+<li><p>ESP : pointer in stack (SS段)</p>
+</li>
+<li><p>EBP : pointer to stack top (SS段)</p>
+<h4 id="分段暫存器"><a href="#分段暫存器" class="headerlink" title="分段暫存器"></a>分段暫存器</h4></li>
+<li><p>cs : Code Segment</p>
+</li>
+<li><p>DS : Data Segment</p>
+</li>
+<li><p>SS : Stack Segment</p>
+</li>
+<li><p>ES : 預留</p>
+</li>
+<li><p>FS : 預留</p>
+</li>
+<li><p>GS : 預留</p>
+<h4 id="EFLAGS暫存器"><a href="#EFLAGS暫存器" class="headerlink" title="EFLAGS暫存器"></a>EFLAGS暫存器</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.imgur.com/6zH1EnB.png"></p>
+</li>
+<li><p>狀態標示</p>
+<ul>
+<li>CF : 進位(bit 0) 進位 -&gt; 1 , else -&gt; 0</li>
+<li>PF : 奇偶 個位數為偶 -&gt; 1 , else -&gt; 0</li>
+<li>AF : 輔助進位 , 標註低四位是否向高四位進位或借位</li>
+<li>ZF : 零    為0 -&gt; 1 , else -&gt; 0</li>
+<li>SF : 符號   小於0 -&gt; 1 , else -&gt; 0</li>
+<li>OF : 溢出 發生 -&gt; 1 , else -&gt;0</li>
+</ul>
+</li>
+<li><p>DF : 控製字符串處理的從左到右或從右到左方向的標誌</p>
+</li>
+<li><p>系統標誌、IOPL域 (用於控制作業系統、執行操作，不允許被應用程式所修改。)</p>
+<ul>
+<li>TF : 追蹤  1-&gt;單步執行 0-&gt;連續工作狀態</li>
+<li>IF : 中斷允許 1-&gt;可響應中斷 0-&gt;不可</li>
+<li>IOPL : I/O特權 process的CPL&lt;=IOPL才可訪問I/O地址，CPL=0可修改IOPL域</li>
+<li>NT : 嵌套任務 1-&gt;嵌套 0-&gt;嵌套</li>
+<li>RT : 恢復 1-&gt;禁用指令斷點 0-&gt;允許斷點</li>
+<li>VM : 1-&gt;模擬8086模式 0-&gt;保護模式</li>
+<li>AC : 對齊檢測</li>
+<li>VIF : 虛擬中斷</li>
+<li>VIP : 虛擬中斷等待</li>
+<li>ID : 識別 1-&gt;支持CPUID指令  0-&gt;不支持<h4 id="EIP暫存器"><a href="#EIP暫存器" class="headerlink" title="EIP暫存器"></a>EIP暫存器</h4>指向下一個指令</li>
+</ul>
+</li>
+</ul>
+<h2 id="checksec"><a href="#checksec" class="headerlink" title="checksec"></a>checksec</h2><h4 id="Arch"><a href="#Arch" class="headerlink" title="Arch"></a>Arch</h4><pre><code>檔案執行的平台
+</code></pre>
+<h4 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO"></a>RELRO</h4><pre><code>Partial RELRO/FULL RELRO, FULL RELRO = 無法修改got表
+</code></pre>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><pre><code>Canary found = 無法直接溢位修改返回地址,需改寫指標與區域變數
+</code></pre>
+<h4 id="NX-No-execute-windows-DEP"><a href="#NX-No-execute-windows-DEP" class="headerlink" title="NX (No-execute) windows(DEP)"></a>NX (No-execute) windows(DEP)</h4><pre><code>shellcode不可執行，可用ROP-chain繞過，堆疊中資料沒有執行權限
+</code></pre>
+<h4 id="PIE-Postion-Indenpendent-executable-window-ASLR"><a href="#PIE-Postion-Indenpendent-executable-window-ASLR" class="headerlink" title="PIE(Postion-Indenpendent executable) window(ASLR)"></a>PIE(Postion-Indenpendent executable) window(ASLR)</h4><pre><code>地址隨機化，basic address會變
+</code></pre>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>授權條款</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下來閱讀</span></section><section class="body fs14"><a id="next" href="/snake/2021/08/22/hello-world/">Hello World<span class="note">較早</span></a><div class="line"></div><a id="prev" href="/snake/2021/08/23/python-translation/">品系介紹<span class="note">較新</span></a><div class="line"></div><a id="more" href="/snake/archives">檢索所有文章</a></section></div>
+
+
+
+
+
+
+
+
       
-      <span>&copy;</span>
-      
-      <span>2021</span>
-      
-      <span class="author"><i class="fa fa-user"></i>Deng Yuan</span>
-    </div>
-    
-      <span>Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> </span>
-    
-    
-      <span>|</span> <span>Theme - <a target="_blank" rel="noopener" href="https://github.com/littleee/corazon">Corazon</a></span>
-      
-        <span>v1.0.0</span>
-      
-    
-  </div>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本網誌所有文章除特別聲明外，均採用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 授權條款。轉載請註明出處。</p>
+<p>本站由 <a href="https://yywc11.github.io/snake/snake/">@Deng Yuan</a> 建立，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.2" title="v1.4.2">Stellar</a> 作為主題。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
 </div>
 
-    </main>
-  </body>
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.2';
+  stellar.config = {
+    date_suffix: {
+      just: '剛剛',
+      min: '分鐘前',
+      hour: '小時前',
+      day: '天前',
+      month: '個月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/snake/js/plugins/sites.js',
+    friendsjs: '/snake/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/snake/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
 </html>
